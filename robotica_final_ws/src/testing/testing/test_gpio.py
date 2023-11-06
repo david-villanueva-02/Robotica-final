@@ -9,12 +9,6 @@ class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('node_name')
         print("Nodo inicializado")
-        qos_profile = QoSProfile(
-            reliability = ReliabilityPolicy.BEST_EFFORT,
-            durability = DurabilityPolicy.TRANSIENT_LOCAL,
-            history = HistoryPolicy.KEEP_LAST,
-            depth = 1
-        )
 
         # Create Publishers
      
