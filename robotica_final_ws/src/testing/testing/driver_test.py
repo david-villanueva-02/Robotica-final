@@ -37,9 +37,9 @@ class NodeName(Node):
         
     def Girar(self):
         GPIO.output(stepPin,False)
-        sleep(0.0005)
+        sleep(0.0025)
         GPIO.output(stepPin,True)
-        sleep(0.0005)
+        sleep(0.0025)
         print("step")
 def pinesCleanup():
     GPIO.cleanup(7)
