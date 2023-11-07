@@ -33,6 +33,7 @@ class NodeName(Node):
         GPIO.output(stepPin,True)
         sleep(0.0005)
         GPIO.output(stepPin,False)
+        print("step")
 
         
 def pinesCleanup():
