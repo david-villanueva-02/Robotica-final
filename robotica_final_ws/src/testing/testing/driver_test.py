@@ -18,6 +18,7 @@ class NodeName(Node):
         
 
         self.step_counter = 0
+        self.dir = True
 
         # Pines del motor 1
         GPIO.setup(stepPin, GPIO.OUT) # Pull Pin
@@ -25,13 +26,14 @@ class NodeName(Node):
         GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
 
         GPIO.output(enPin,False)      # Enables with value 0
-        GPIO.output(dirPin, True)
+        GPIO.output(dirPin, self.dir)
 
         self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
         if (self.step_counter == 3200): 
-            GPIO.output(dirPin, False)
+            self.dir = not(self.dir)
+            GPIO.output(dirPin, self.dir)
             self.step_counter = 0
         GPIO.output(stepPin,True)
         sleep(0.0005)
