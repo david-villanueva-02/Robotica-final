@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+from time import sleep
+
 stepPin = 36
 dirPin = 38
 enPin = 40
@@ -20,10 +22,11 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
-        self.main_timer = self.create_timer(0.05,self.callback_main_timer)
+        self.main_timer = self.create_timer(0.005,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
         GPIO.output(stepPin,False)
+        sleep(0.005)
         GPIO.output(stepPin,True)
         print("step")
         
