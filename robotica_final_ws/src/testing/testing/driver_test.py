@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from time import sleep
+from time import sleep, time
 
 stepPin = 36
 dirPin = 38
@@ -15,6 +15,7 @@ class NodeName(Node):
         super().__init__('node_name')
         print("Nodo inicializado")
         GPIO.setmode(GPIO.BOARD)
+        timer_start = time()
 
         self.step_counter = 0
 
@@ -29,11 +30,13 @@ class NodeName(Node):
         self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
-
         GPIO.output(stepPin,False)
         sleep(0.0005)
         GPIO.output(stepPin,True)
-        self.step_counter += 1
+        timer_end = time()
+        tiempo = timer_end - timer_start
+        print(str(tiempo))
+
         print("step #" + str(self.step_counter))
         
 def pinesCleanup():
