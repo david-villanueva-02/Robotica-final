@@ -10,19 +10,19 @@ def Girar():
     GPIO.output(enPin,True)      # Enables with value 0
     for x in range(400):
         GPIO.output(stepPin,True)
-        sleep(0.01)
+        sleep(0.001)
         GPIO.output(stepPin,False)
-        sleep(0.01)
+        sleep(0.001)
         print("step "+str(x)) 
     print("Changind direction...")
     sleep(1)
-    
+
     GPIO.output(enPin,False)      # Enables with value 0
     for x in range(400):
         GPIO.output(stepPin,True)
-        sleep(0.01)
+        sleep(0.001)
         GPIO.output(stepPin,False)
-        sleep(0.01)
+        sleep(0.001)
         print("step "+str(x)) 
     print("Changind direction...")
     sleep(1)
