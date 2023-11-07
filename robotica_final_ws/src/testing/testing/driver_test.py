@@ -15,7 +15,7 @@ class NodeName(Node):
         super().__init__('node_name')
         print("Nodo inicializado")
         GPIO.setmode(GPIO.BOARD)
-        timer_start = time()
+        
 
         self.step_counter = 0
 
@@ -27,6 +27,7 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
+        timer_start = time()
         self.main_timer = self.create_timer(1,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
@@ -36,8 +37,6 @@ class NodeName(Node):
         timer_end = time()
         tiempo = timer_end - timer_start
         print(str(tiempo))
-
-        print("step #" + str(self.step_counter))
         
 def pinesCleanup():
     GPIO.cleanup(7)
