@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'test_gpio = testing.test_gpio:main'
+            'test_gpio = testing.test_gpio:main',
+            'driver_test = testing.driver_test:main'
         ],
     },
 )
