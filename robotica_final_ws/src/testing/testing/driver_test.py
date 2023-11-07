@@ -22,7 +22,7 @@ class NodeName(Node):
         GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
 
         GPIO.output(enPin,False)      # Enables with value 0
-        GPIO.output(dirPin, True)
+        GPIO.output(dirPin, False)
 
         self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
