@@ -7,6 +7,8 @@ from time import sleep
 stepPin = 36
 dirPin = 38
 enPin = 40
+timer_start = 0
+timer_end = 0
 
 class NodeName(Node):
     def __init__(self) -> None:
@@ -24,15 +26,15 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
-        self.main_timer = self.create_timer(0.0005,self.callback_main_timer)
+        self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
+
         GPIO.output(stepPin,False)
         sleep(0.0005)
         GPIO.output(stepPin,True)
         self.step_counter += 1
         print("step #" + str(self.step_counter))
-
         
 def pinesCleanup():
     GPIO.cleanup(7)
