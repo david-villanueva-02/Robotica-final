@@ -2,10 +2,7 @@ import RPi.GPIO as GPIO
 from std_msgs.msg import String
 from time import sleep
 
-stepPin = 36
-dirPin = 38
-enPin = 40
-step_counter = 0
+
 
 def Girar():
     GPIO.output(stepPin,False)
@@ -16,6 +13,12 @@ def Girar():
     print("step "+str(step_counter)) 
     
 def main():
+
+    stepPin = 36
+    dirPin = 38
+    enPin = 40
+    step_counter = 0
+    
     GPIO.setmode(GPIO.BOARD)
 
     # Pines del motor 1
