@@ -30,9 +30,14 @@ class NodeName(Node):
         self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
+        if (self.step_counter == 3200): 
+            GPIO.output(dirPin, False)
+            self.step_counter = 0
         GPIO.output(stepPin,True)
         sleep(0.0005)
         GPIO.output(stepPin,False)
+        self.step_counter += 1
+
         print("step")
 
         
