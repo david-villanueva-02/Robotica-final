@@ -13,7 +13,6 @@ def Girar():
         sleep(0.01)
         GPIO.output(stepPin,False)
         sleep(0.01)
-        step_counter += 1
         print("step "+str(x)) 
     sleep(1)
     print("Changind direction...")
