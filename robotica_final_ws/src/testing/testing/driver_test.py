@@ -24,9 +24,7 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
-        while(True): self.Girar()
-        
-        #self.main_timer = self.create_timer(0.001,self.callback_main_timer)
+        self.main_timer = self.create_timer(0.001,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
         GPIO.output(stepPin,False)
@@ -34,13 +32,7 @@ class NodeName(Node):
         GPIO.output(stepPin,True)
         self.step_counter += 1
         print("step #" + str(self.step_counter))
-        
-    def Girar(self):
-        GPIO.output(stepPin,False)
-        sleep(0.001)
-        GPIO.output(stepPin,True)
-        sleep(0.001)
-        print("step")
+
         
 def pinesCleanup():
     GPIO.cleanup(7)
