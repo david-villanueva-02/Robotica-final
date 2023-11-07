@@ -27,11 +27,11 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
-        self.main_timer = self.create_timer(0.001,self.callback_main_timer)
+        self.main_timer = self.create_timer(1,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
         GPIO.output(stepPin,False)
-        sleep(0.0005)
+        sleep(0.5)
         GPIO.output(stepPin,True)
         timer_end = time()
         tiempo = timer_end - timer_start
