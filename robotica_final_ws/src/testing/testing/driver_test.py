@@ -25,6 +25,7 @@ class NodeName(Node):
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
         GPIO.output(pullPin,False)
         GPIO.output(pullPin,True)
+        print("step")
         
 def pinesCleanup():
     GPIO.cleanup(7)
