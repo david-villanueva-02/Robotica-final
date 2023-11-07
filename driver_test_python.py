@@ -4,13 +4,14 @@ from time import sleep
 
 
 
-def Girar():
+def Girar(stepPin, step_counter):
     GPIO.output(stepPin,False)
     sleep(0.0005)
     GPIO.output(stepPin,True)
     sleep(0.0005)
     step_counter +=1
     print("step "+str(step_counter)) 
+    return step_counter
     
 def main():
 
@@ -18,7 +19,8 @@ def main():
     dirPin = 38
     enPin = 40
     step_counter = 0
-    
+   
+
     GPIO.setmode(GPIO.BOARD)
 
     # Pines del motor 1
@@ -29,7 +31,7 @@ def main():
     GPIO.output(enPin,False)      # Enables with value 0
     GPIO.output(dirPin, True)
 
-    while(True): Girar()
+    while(True): step_counter = Girar(stepPin,step_counter)
 
 if __name__ == "__main__":
     main()
