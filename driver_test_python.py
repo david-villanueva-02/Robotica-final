@@ -16,7 +16,8 @@ def Girar():
         print("step "+str(x)) 
     sleep(1)
     print("Changind direction...")
-    dir = not(dir)
+    if dir: dir = False
+    else:   dir = True
     GPIO.output(enPin,dir)      # Enables with value 0
     
 GPIO.setmode(GPIO.BOARD)
