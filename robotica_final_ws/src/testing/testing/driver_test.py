@@ -31,7 +31,7 @@ class NodeName(Node):
         self.main_timer = self.create_timer(0.01,self.callback_main_timer)
 
     def callback_main_timer(self): # 1 step - 200 steps = 1 turn
-        if (self.step_counter == 201): 
+        if (self.step_counter == 200): 
             self.dir = not(self.dir)
             GPIO.output(dirPin, self.dir)
             self.step_counter = 0
