@@ -2,36 +2,33 @@ import RPi.GPIO as GPIO
 from std_msgs.msg import String
 from time import sleep
 
+stepPin = 36
+dirPin = 38
+enPin = 40
+dir = False
 
-
-def Girar(stepPin, step_counter):
-    GPIO.output(stepPin,False)
-    sleep(0.0005)
-    GPIO.output(stepPin,True)
-    sleep(0.0005)
-    step_counter +=1
-    print("step "+str(step_counter)) 
-    return step_counter
+def Girar():
+    for x in range(400):
+        GPIO.output(stepPin,True)
+        sleep(0.01)
+        GPIO.output(stepPin,False)
+        sleep(0.01)
+        step_counter += 1
+        print("step "+str(x)) 
+    sleep(1)
+    print("Changind direction...")
+    dir = not(dir)
+    GPIO.output(enPin,dir)      # Enables with value 0
     
-def main():
+GPIO.setmode(GPIO.BOARD)
 
-    stepPin = 36
-    dirPin = 38
-    enPin = 40
-    step_counter = 0
-   
+# Pines del motor 1
+GPIO.setup(stepPin, GPIO.OUT) # Pull Pin
+GPIO.setup(dirPin, GPIO.OUT)  # Dir Pin - controls direction
+GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
 
-    GPIO.setmode(GPIO.BOARD)
+GPIO.output(enPin,dir)      # Enables with value 0
+GPIO.output(dirPin, True)
 
-    # Pines del motor 1
-    GPIO.setup(stepPin, GPIO.OUT) # Pull Pin
-    GPIO.setup(dirPin, GPIO.OUT)  # Dir Pin - controls direction
-    GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
+while(True): Girar()
 
-    GPIO.output(enPin,False)      # Enables with value 0
-    GPIO.output(dirPin, True)
-
-    while(True): step_counter = Girar(stepPin,step_counter)
-
-if __name__ == "__main__":
-    main()
