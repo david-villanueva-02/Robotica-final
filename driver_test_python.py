@@ -6,9 +6,9 @@ from time import sleep
 
 def Girar(stepPin, step_counter):
     GPIO.output(stepPin,False)
-    sleep(0.0005)
+    sleep(0.005)
     GPIO.output(stepPin,True)
-    sleep(0.0005)
+    sleep(0.005)
     step_counter +=1
     print("step "+str(step_counter)) 
     return step_counter
