@@ -14,7 +14,7 @@ def Girar():
         GPIO.output(stepPin,False)
         sleep(0.001)
         print("step "+str(x)) 
-    print("Changind direction...")
+    print("Changing direction...")
     sleep(1)
 
     GPIO.output(enPin,False)      # Enables with value 0
@@ -24,7 +24,7 @@ def Girar():
         GPIO.output(stepPin,False)
         sleep(0.001)
         print("step "+str(x)) 
-    print("Changind direction...")
+    print("Changing direction...")
     sleep(1)
     
 GPIO.setmode(GPIO.BOARD)
