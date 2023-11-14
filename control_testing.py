@@ -46,7 +46,7 @@ control_motor(100)
 
 import serial 
 from time import sleep
-ser = serial.Serial('/dev/serial1',115200)
+ser = serial.Serial('/dev/ttyUSB3',115200)
 try:
     while True:
         if ser.in_waiting > 0:
