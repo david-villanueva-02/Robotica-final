@@ -41,7 +41,7 @@ class NodeName(Node):
             for event in pygame.event.get():
                 if event.type == pygame.JOYAXISMOTION:
                     match event.axis:
-                        case 1:
+                        case 1: # Revolute 1
                             if event.value > 0.8:
                                 self.message_move.data = "Reduce"
                             elif event.value < -0.8:
@@ -49,13 +49,13 @@ class NodeName(Node):
                             else: self.message_move.data = ""
                             self.R1.publish(self.message_move)
                             break
-                        case 4:
+                        case 4: # Revolute 2
                             if event.value > 0.8:
                                 self.message_move.data = "Reduce"
                             elif event.value < -0.8:
                                 self.message_move.data = "Aumenta"
                             else: self.message_move.data = ""
-                            self.R1.publish(self.message_move)
+                            self.R2.publish(self.message_move)
                             break
 
                 elif event.type == pygame.JOYBUTTONDOWN:
@@ -66,7 +66,7 @@ class NodeName(Node):
                     P1 = event.button[0]
                     P2 = event.button[1]
                     match P1:
-                        case -1:
+                        case -1: # Prismatico 1
                             self.message_move.data = "Reduce"
                             break
                         case 1:
@@ -76,7 +76,7 @@ class NodeName(Node):
                             self.message_move.data = ""
                             break
                     self.P1.publish(self.message_move)
-                    match P2:
+                    match P2: # Prismatico 2
                         case -1:
                             self.message_move.data = "Reduce"
                             break
