@@ -14,7 +14,11 @@ class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('input_control')
         self.get_counter = pygame.joystick.get_count(0)
-        
+
+        self.P1 = self.create_publisher(String,"/P1",10)
+        self.P2 = self.create_publisher(String,"/P2",10)
+        self.R1 = self.create_publisher(String,"/R1",10)
+        self.R2 = self.create_publisher(String,"/R2",10)
 
         if self.get_counter == 0:
             print("Control no encontrado")
@@ -34,6 +38,10 @@ class NodeName(Node):
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
                 print("Eje {}: {}".format(event.axis, event.value))
+                match event.axis:
+                    case 1:
+                        break
+                
             elif event.type == pygame.JOYBUTTONDOWN:
                 print("Boton presionado: {}".format(event.button))
             elif event.type == pygame.JOYBUTTONUP:
