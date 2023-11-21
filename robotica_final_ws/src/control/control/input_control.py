@@ -1,5 +1,5 @@
-import RPi.GPIO as GPIO
 import rclpy
+import pygame
 from rclpy.node import Node
 from std_msgs.msg import String
 from time import sleep, time
@@ -13,49 +13,45 @@ timer_end = 0
 class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('input_control')
-        print("Nodo inicializado")
-        GPIO.setmode(GPIO.BOARD)
+        self.get_counter = pygame.joystick.get_count(0)
         
 
-        self.step_counter = 0
-        self.dir = True
+        if self.get_counter == 0:
+            print("Control no encontrado")
+        else:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+            try:
+                self.main_timer = self.create_timer(0.01, self.callback_timer1)
+            except KeyboardInterrupt:
+                print("Programa terminado")
+            finally:
+                self.joystick.quit()
+                pygame.quit()
+    
 
-        # Pines del motor 1
-        GPIO.setup(stepPin, GPIO.OUT) # Pull Pin
-        GPIO.setup(dirPin, GPIO.OUT)  # Dir Pin - controls direction
-        GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
-
-        GPIO.output(enPin,False)      # Enables with value 0
-        GPIO.output(dirPin, self.dir)
-
-        self.main_timer = self.create_timer(0.01,self.callback_main_timer)
-
-    def callback_main_timer(self): # 1 step - 200 steps = 1 turn
-        if (self.step_counter == 200): 
-            self.dir = not(self.dir)
-            GPIO.output(dirPin, self.dir)
-            self.step_counter = 0
-        GPIO.output(stepPin,True)
-        sleep(0.005)
-        GPIO.output(stepPin,False)
-        self.step_counter += 1
-
-        print("step")
-
-        
-def pinesCleanup():
-    GPIO.cleanup(7)
+    def callback_timer1(self):
+        for event in pygame.event.get():
+            if event.type == pygame.JOYAXISMOTION:
+                print("Eje {}: {}".format(event.axis, event.value))
+            elif event.type == pygame.JOYBUTTONDOWN:
+                print("Boton presionado: {}".format(event.button))
+            elif event.type == pygame.JOYBUTTONUP:
+                print("Boton liberado: {}".format(event.button))
+            elif event.type == pygame.JOYHATMOTION:
+                print("HAT direction: {}".format(event.value))
 
 def main(args=None) -> None:
+    pygame.init()
+    pygame.joystick.init()
     rclpy.init(args=args)
     node_name= NodeName()
     rclpy.spin(node_name)
     node_name.destroy_node()
-    pinesCleanup()
     rclpy.shutdown()
 
 if __name__=='__main__':
     try:
         main()
-    except Exception as e:
-        print(e)
+    except KeyboardInterrupt:
+        print("Programa terminado")
