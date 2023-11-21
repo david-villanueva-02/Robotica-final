@@ -23,7 +23,7 @@ else:
                 elif event.type == pygame.JOYBUTTONUP:
                     print("Boton liberado: {}".format(event.button))
                 elif event.type == pygame.JOYHATMOTION:
-                    print("HAT direction: {}").format(event.value)
+                    print("HAT direction: {}".format(event.value))
 
             time.sleep(0.01)
 
