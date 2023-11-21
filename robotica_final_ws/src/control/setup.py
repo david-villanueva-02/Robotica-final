@@ -20,6 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'sensing = control.sensing:main',
+            'input_control = control.input_control:main'
         ],
     },
 )
