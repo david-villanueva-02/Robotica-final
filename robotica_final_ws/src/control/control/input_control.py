@@ -19,6 +19,8 @@ class NodeName(Node):
         self.P2 = self.create_publisher(String,"/P2",10)
         self.R1 = self.create_publisher(String,"/R1",10)
         self.R2 = self.create_publisher(String,"/R2",10)
+        self.message_move = String()
+        self.message_move.data = ""
 
         if self.get_counter == 0:
             print("Control no encontrado")
@@ -26,7 +28,7 @@ class NodeName(Node):
             self.joystick = pygame.joystick.Joystick(0)
             self.joystick.init()
             try:
-                self.main_timer = self.create_timer(0.01, self.callback_timer1)
+                self.main_timer = self.create_timer(0.001, self.callback_timer1)
             except KeyboardInterrupt:
                 print("Programa terminado")
             finally:
@@ -37,17 +39,54 @@ class NodeName(Node):
     def callback_timer1(self):
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
-                print("Eje {}: {}".format(event.axis, event.value))
                 match event.axis:
                     case 1:
+                        if event.value > 0.8:
+                            self.message_move.data = "Reduce"
+                        elif event.value < -0.8:
+                            self.message_move.data = "Aumenta"
+                        else: self.message_move.data = ""
+                        self.R1.publish(self.message_move)
                         break
-                
+                    case 4:
+                        if event.value > 0.8:
+                            self.message_move.data = "Reduce"
+                        elif event.value < -0.8:
+                            self.message_move.data = "Aumenta"
+                        else: self.message_move.data = ""
+                        self.R1.publish(self.message_move)
+                        break
+
             elif event.type == pygame.JOYBUTTONDOWN:
                 print("Boton presionado: {}".format(event.button))
             elif event.type == pygame.JOYBUTTONUP:
                 print("Boton liberado: {}".format(event.button))
             elif event.type == pygame.JOYHATMOTION:
-                print("HAT direction: {}".format(event.value))
+                P1 = event.button[0]
+                P2 = event.button[1]
+                match P1:
+                    case -1:
+                        self.message_move.data = "Reduce"
+                        break
+                    case 1:
+                        self.message_move.data = "Aumenta"
+                        break
+                    case 0: 
+                        self.message_move.data = ""
+                        break
+                self.P1.publish(self.message_move)
+                match P2:
+                    case -1:
+                        self.message_move.data = "Reduce"
+                        break
+                    case 1:
+                        self.message_move.data = "Aumenta"
+                        break
+                    case 0:
+                        self.message_move.data = ""
+                        break
+                self.P2.publish(self.message_move)
+                
 
 def main(args=None) -> None:
     pygame.init()
