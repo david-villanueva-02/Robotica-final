@@ -60,28 +60,20 @@ class NodeName(Node):
             elif event.type == pygame.JOYBUTTONUP:
                 print("Boton liberado: {}".format(event.button))
             elif event.type == pygame.JOYHATMOTION:
-                P1 = event.value[0]
-                P2 = event.value[1]
-                print(str(P1))
-                print(str(P2))
-                match P1:
-                    case -1: # Prismatico 1
-                        self.message_move.data = "Reduce"
-                        break
-                    case 1:
-                        self.message_move.data = "Aumenta"
-                        break
-                self.P1.publish(self.message_move)
-                self.message_move.data = ""
-                match P2: # Prismatico 2
-                    case -1:
-                        self.message_move.data = "Reduce"
-                        break
-                    case 1:
-                        self.message_move.data = "Aumenta"
-                        break
-                self.P2.publish(self.message_move)
-                self.message_move.data = ""
+                for i in event.value:
+                    self.message_move.data = ""
+                    match i:
+                        case -1:
+                            self.message_move.data = "Reduce"
+                            break
+                        case 0:
+                            self.message_move.data = ""
+                            break
+                        case 1:
+                            self.message_move.data = "Aumenta"
+                            break
+                    if (i): self.P2.publish(self.message_move)
+                    else: self.P1.publish(self.message_move)
             
 
 def main(args=None) -> None:
