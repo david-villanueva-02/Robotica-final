@@ -12,8 +12,6 @@ timer_end = 0
 
 class NodeName(Node):
     def __init__(self) -> None:
-        pygame.init()
-        pygame.joystick.init()
         super().__init__('input_control')
         self.get_counter = pygame.joystick.get_count()
 
@@ -37,7 +35,6 @@ class NodeName(Node):
             finally:
                 self.joystick.quit()
                 pygame.quit()
-    
 
     def callback_timer1(self):
         if self.flag:
@@ -93,6 +90,8 @@ class NodeName(Node):
                 
 
 def main(args=None) -> None:
+    pygame.init()
+    pygame.joystick.init()
     rclpy.init(args=args)
     node_name= NodeName()
     rclpy.spin(node_name)
@@ -104,3 +103,5 @@ if __name__=='__main__':
         main()
     except KeyboardInterrupt:
         print("Programa terminado")
+    finally:
+        pygame.quit()
