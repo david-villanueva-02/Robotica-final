@@ -60,8 +60,8 @@ class NodeName(Node):
             elif event.type == pygame.JOYBUTTONUP:
                 print("Boton liberado: {}".format(event.button))
             elif event.type == pygame.JOYHATMOTION:
-                P1 = event.button[0]
-                P2 = event.button[1]
+                P1 = event.value[0]
+                P2 = event.value[1]
                 match P1:
                     case -1: # Prismatico 1
                         self.message_move.data = "Reduce"
