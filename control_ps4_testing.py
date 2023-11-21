@@ -17,7 +17,7 @@ else:
 
             for event in pygame.event.get():
                 if event.type == pygame.JOYAXISMOTION:
-                    if (event.axis == 0 or event.axis == 3):
+                    if (event.axis == 1 or event.axis == 4):
                             print("Eje {}: {}".format(event.axis, event.value))
                 elif event.type == pygame.JOYBUTTONDOWN:
                     print("Boton presionado: {}".format(event.button))
