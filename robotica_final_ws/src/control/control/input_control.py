@@ -62,6 +62,8 @@ class NodeName(Node):
             elif event.type == pygame.JOYHATMOTION:
                 P1 = event.value[0]
                 P2 = event.value[1]
+                print(str(P1))
+                print(str(P2))
                 match P1:
                     case -1: # Prismatico 1
                         self.message_move.data = "Reduce"
