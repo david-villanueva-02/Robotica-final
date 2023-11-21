@@ -13,7 +13,7 @@ timer_end = 0
 class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('input_control')
-        self.get_counter = pygame.joystick.get_count(0)
+        self.get_counter = pygame.joystick.get_count()
 
         self.P1 = self.create_publisher(String,"/P1",10)
         self.P2 = self.create_publisher(String,"/P2",10)
