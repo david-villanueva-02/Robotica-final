@@ -71,10 +71,8 @@ class NodeName(Node):
                     case 1:
                         self.message_move.data = "Aumenta"
                         break
-                    case 0: 
-                        self.message_move.data = ""
-                        break
                 self.P1.publish(self.message_move)
+                self.message_move.data = ""
                 match P2: # Prismatico 2
                     case -1:
                         self.message_move.data = "Reduce"
@@ -82,10 +80,8 @@ class NodeName(Node):
                     case 1:
                         self.message_move.data = "Aumenta"
                         break
-                    case 0:
-                        self.message_move.data = ""
-                        break
                 self.P2.publish(self.message_move)
+                self.message_move.data = ""
             
 
 def main(args=None) -> None:
