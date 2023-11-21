@@ -21,22 +21,20 @@ class NodeName(Node):
         self.R2 = self.create_publisher(String,"/R2",10)
         self.message_move = String()
         self.message_move.data = ""
-        self.main_timer = self.create_timer(0.001, self.callback_timer1)
-        self.flag = False
         if self.get_counter == 0:
             print("Control no encontrado")
         else:
             self.joystick = pygame.joystick.Joystick(0)
             self.joystick.init()
             try:
-                self.flag = True
+                while True: self.main_cycle()
             except KeyboardInterrupt:
                 print("Programa terminado")
             finally:
                 self.joystick.quit()
                 pygame.quit()
 
-    def callback_timer1(self):
+    def main_cycle(self):
         if self.flag:
             for event in pygame.event.get():
                 if event.type == pygame.JOYAXISMOTION:
