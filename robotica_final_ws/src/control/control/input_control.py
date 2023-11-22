@@ -60,7 +60,8 @@ class NodeName(Node):
             elif event.type == pygame.JOYBUTTONUP:
                 print("Boton liberado: {}".format(event.button))
             elif event.type == pygame.JOYHATMOTION:
-
+                print("HAT direction: {}".format(event.value))
+                print(enumerate(event.value))
                 ## Corregir esta parte 
                 for j, i in enumerate(event.value, start = 0):
                     self.message_move.data = ""
@@ -76,7 +77,6 @@ class NodeName(Node):
                             break
                     if (j): self.P2.publish(self.message_move)
                     else: self.P1.publish(self.message_move)
-            
 
 def main(args=None) -> None:
     pygame.init()
