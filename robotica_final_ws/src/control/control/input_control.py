@@ -68,13 +68,10 @@ class NodeName(Node):
                     match i:
                         case -1:
                             self.message_move.data = "Reduce"
-                            break
                         case 0:
                             self.message_move.data = ""
-                            break
                         case 1:
                             self.message_move.data = "Aumenta"
-                            break
                     if (j): self.P2.publish(self.message_move)
                     else: self.P1.publish(self.message_move)
 
