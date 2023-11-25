@@ -26,7 +26,7 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, True)
 
-        self.subscriber_P1 = self.create_subscription(String, "/P2", self.callback_P1,10)
+        self.subscriber_P1 = self.create_subscription(String, "/R2", self.callback_P1,10)
         self.main_timer = self.create_timer(0.01,self.callback_main_timer)
     
     def callback_P1(self,msg):
