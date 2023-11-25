@@ -5,9 +5,9 @@ from std_msgs.msg import String
 from time import sleep, time
 
 # Motor 3 - R1
-stepPin = 11
-dirPin = 13
-enPin = 15 
+stepPin = 19
+dirPin = 21
+enPin = 23
 
 class NodeName(Node):
     def __init__(self) -> None:
