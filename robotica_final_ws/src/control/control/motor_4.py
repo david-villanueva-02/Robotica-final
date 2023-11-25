@@ -42,9 +42,9 @@ class NodeName(Node):
             GPIO.output(enPin,False)
 
     def callback_main_timer(self): 
-        GPIO.output(stepPin,GPIO.HIGH)
+        GPIO.output(stepPin, True)
         sleep(0.005)
-        GPIO.output(stepPin, GPIO.LOW)
+        GPIO.output(stepPin, False)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
