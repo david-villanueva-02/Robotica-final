@@ -62,7 +62,7 @@ class NodeName(Node):
             elif event.type == pygame.JOYHATMOTION:
                 print("HAT direction: {}".format(event.value))
                 print(enumerate(event.value))
-                ## Optimizar
+                ## Se puede optimizar 
                 for j, i in enumerate(event.value, start = 0):
                     self.message_move.data = ""
                     match i:

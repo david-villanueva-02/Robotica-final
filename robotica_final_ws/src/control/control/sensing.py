@@ -17,6 +17,7 @@ class NodeName(Node):
         self.ser = serial.Serial('/dev/ttyACM0',115200)
         self.sensing_timer = self.create_timer(0.01,self.sensing_timer_callback)
 
+    # Recibe informacion de un arduino
     def sensing_timer_callback(self):
         try:
             if self.ser.in_waiting > 0:

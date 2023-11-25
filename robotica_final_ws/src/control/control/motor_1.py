@@ -9,39 +9,14 @@ stepPin = 36
 dirPin = 38  
 enPin = 40   
 
-# Motor 2 - P2
-''' 
-stepPin = 33
-dirPin = 35
-enPin = 37
-'''
-
-# Motor 3 - R1
-''' 
-stepPin = 24
-dirPin = 26
-enPin = 28
-'''
-
-# Motor 4 - R2
-''' 
-stepPin = 3
-dirPin = 5
-enPin = 7
-'''
-
-timer_start = 0
-timer_end = 0
-
 class NodeName(Node):
     def __init__(self) -> None:
-        super().__init__('node_name')
+        super().__init__('nodo_motor_1')
         print("Nodo inicializado")
         GPIO.setmode(GPIO.BOARD)
         
-
         self.step_counter = 0
-        self.dir = True
+        self.dir = "" # Direccion como string recibido del publiser
 
         # Pines del motor 1
         GPIO.setup(stepPin, GPIO.OUT) # Pull Pin
@@ -51,30 +26,31 @@ class NodeName(Node):
         GPIO.output(enPin,False)      # Enables with value 0
         GPIO.output(dirPin, self.dir)
 
+        self.subscriber_P1 = self.create_subscription(String, "/P1", self.callback_P1,10)
         self.main_timer = self.create_timer(0.01,self.callback_main_timer)
-
-    def callback_main_timer(self): # 1 step - 200 steps = 1 turn
-        if (self.step_counter == 200): 
-            self.dir = not(self.dir)
-            GPIO.output(dirPin, self.dir)
-            self.step_counter = 0
-        GPIO.output(stepPin,True)
-        sleep(0.005)
-        GPIO.output(stepPin,False)
-        self.step_counter += 1
-
-        print("step")
-
+    
+    def callback_P1(self,msg):
+        self.dir = msg.data
+        if self.dir == "Aumenta":
+            GPIO.output(dirPin, True)
+        elif self.dir == "Reduce":
+            GPIO.output(dirPin, False)
         
-def pinesCleanup():
-    GPIO.cleanup(7)
+        if self.dir == "":
+            GPIO.output(enPin,True)
+        else:
+            GPIO.output(enPin,False)
+
+    def callback_main_timer(self): 
+        GPIO.output(stepPin,GPIO.HIGH)
+        sleep(0.005)
+        GPIO.output(stepPin, GPIO.LOW)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
     node_name= NodeName()
     rclpy.spin(node_name)
     node_name.destroy_node()
-    pinesCleanup()
     rclpy.shutdown()
 
 if __name__=='__main__':
