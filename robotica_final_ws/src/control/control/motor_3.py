@@ -45,6 +45,7 @@ class NodeName(Node):
         GPIO.output(stepPin,True)
         sleep(0.005)
         GPIO.output(stepPin, False)
+        print("step")
 
 def main(args=None) -> None:
     rclpy.init(args=args)
