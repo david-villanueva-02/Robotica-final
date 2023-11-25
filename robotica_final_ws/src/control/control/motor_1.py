@@ -24,7 +24,7 @@ class NodeName(Node):
         GPIO.setup(enPin, GPIO.OUT)   # Enable pin 
 
         GPIO.output(enPin,False)      # Enables with value 0
-        GPIO.output(dirPin, self.dir)
+        GPIO.output(dirPin, True)
 
         self.subscriber_P1 = self.create_subscription(String, "/P1", self.callback_P1,10)
         self.main_timer = self.create_timer(0.01,self.callback_main_timer)
