@@ -18,9 +18,9 @@ enPin = 37
 
 # Motor 3 - R1
 ''' 
-stepPin = 24
-dirPin = 26
-enPin = 28
+stepPin = 11
+dirPin = 13
+enPin = 15
 '''
 
 # Motor 4 - R2

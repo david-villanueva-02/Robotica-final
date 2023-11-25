@@ -35,7 +35,7 @@ class NodeName(Node):
             GPIO.output(dirPin, True)
         elif self.dir == "Reduce":
             GPIO.output(dirPin, False)
-
+        
         if self.dir == "":
             GPIO.output(enPin,True)
         else:

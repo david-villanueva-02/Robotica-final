@@ -7,7 +7,7 @@ from time import sleep, time
 # Motor 3 - R1
 stepPin = 11
 dirPin = 13
-enPin = 15
+enPin = 15 
 
 class NodeName(Node):
     def __init__(self) -> None:
@@ -35,7 +35,7 @@ class NodeName(Node):
             GPIO.output(dirPin, True)
         elif self.dir == "Reduce":
             GPIO.output(dirPin, False)
-
+        
         if self.dir == "":
             GPIO.output(enPin,True)
         else:
@@ -45,7 +45,6 @@ class NodeName(Node):
         GPIO.output(stepPin,True)
         sleep(0.005)
         GPIO.output(stepPin, False)
-        print("step")
 
 def main(args=None) -> None:
     rclpy.init(args=args)
