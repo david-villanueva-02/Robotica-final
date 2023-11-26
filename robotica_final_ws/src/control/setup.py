@@ -22,10 +22,7 @@ setup(
         'console_scripts': [
             'sensing = control.sensing:main',
             'input_control = control.input_control:main',
-            'motor_1 = control.motor_1:main',
-            'motor_2 = control.motor_2:main',
-            'motor_3 = control.motor_3:main',
-            'motor_4 = control.motor_4:main'
+            'simple_motor = control.simple_motor:main',
         ],
     },
 )
