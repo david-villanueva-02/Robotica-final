@@ -29,6 +29,7 @@ class NodeName(Node):
 
         GPIO.setmode(GPIO.BOARD)
 
+
         # Sensor 1
         GPIO.setup(13,GPIO.OUT) # TRIG 1
         GPIO.setup(15,GPIO.IN)  # ECHO 1
