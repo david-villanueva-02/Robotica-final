@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Float32
+from time import sleep
 
 class NodeName(Node):
     def __init__(self) -> None:
@@ -36,7 +37,8 @@ class NodeName(Node):
         GPIO.setup(self.enPin, GPIO.OUT)   # Enable pin 
 
         GPIO.output(self.enPin,False)      # Enables with value 0
-        GPIO.output(self.dirPin, True)     # Sets a direction
+        self.dir = True
+        GPIO.output(self.dirPin, self.dir) # Sets a direction
 
         self.topic_info = self.get_parameter("topic_info").value        # Sensado 
         self.topic_command = self.get_parameter("topic_command").value  # Comando
@@ -70,9 +72,16 @@ class NodeName(Node):
 
     # Control de posicion
     def PID_timer_callback(self):
-        if (self.referencia < self.value):
-            pass
-        pass
+
+        # Establecer margenes de error, se ponen por 3 grados/cm, por definir 
+        if (self.value < self.referencia + 3 or self.value > self.referencia + 3):
+            if (self.referencia > self.value):
+                GPIO.output(self.dirPin, True)
+            elif (self.referencia < self.value):
+                GPIO.output(self.dirPin, False)
+            GPIO.output(self.stepPin,True)
+            sleep(0.005)
+            GPIO.output(self.stepPin,False)
         
 def pinesCleanup():
     GPIO.cleanup(7)
