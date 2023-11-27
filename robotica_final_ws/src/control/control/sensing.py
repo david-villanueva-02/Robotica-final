@@ -24,7 +24,7 @@ class NodeName(Node):
         self.valor_P2 = Float32()
 
         self.valor_P1.data = 0.0
-        self.valor_P22.data = 0.0
+        self.valor_P2.data = 0.0
         self.valor_ang.data = 0.0
 
         GPIO.setmode(GPIO.BOARD)
