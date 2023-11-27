@@ -44,7 +44,7 @@ class NodeName(Node):
         self.pub_R2 = self.create_publisher(Float32, "/R2_info", 10)
 
         self.arduino_timer = self.create_timer(0.01,self.arduino_timer_callback)
-        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback(16,18,2))
+        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback)
         #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback(13,15,1))
 
     # Recibe informacion de un arduino
@@ -67,7 +67,11 @@ class NodeName(Node):
             self.ser.close()
 
     # Lee la distancia de los sensores ultrasonicos
-    def sensor_timer_callback(self,trigpin,echopin,motor):
+    def sensor_timer_callback(self):
+        trigpin = 16
+        echopin = 18
+        motor = 2
+        (16,18,2)
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
         sleep(0.00001)
