@@ -24,7 +24,7 @@ class NodeName(Node):
         self.valor_P2 = Float32()
 
         self.valor_P1.data = 0.0
-        self.valor_P2.data = 0.0
+        self.valor_P22.data = 0.0
         self.valor_ang.data = 0.0
 
         GPIO.setmode(GPIO.BOARD)
@@ -44,7 +44,7 @@ class NodeName(Node):
         self.pub_R2 = self.create_publisher(Float32, "/R2_info", 10)
 
         self.arduino_timer = self.create_timer(0.01,self.arduino_timer_callback)
-        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback(self,16,18,2))
+        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback(16,18,2))
         #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback(13,15,1))
 
     # Recibe informacion de un arduino
