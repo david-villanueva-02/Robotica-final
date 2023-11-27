@@ -53,7 +53,7 @@ class NodeName(Node):
         # Timer para mover la referencia 1 unidad / segundo
         self.main_timer = self.create_timer(1,self.referencia_timer_callback)
 
-        self.PID_timer = self.create_timer(0.01,self.PID_timer_callback,10)
+        self.PID_timer = self.create_timer(0.01,self.PID_timer_callback)
 
     def referencia_timer_callback(self): 
         if (self.command == "Aumenta" and self.referencia + 1 < self.limits[0]):
