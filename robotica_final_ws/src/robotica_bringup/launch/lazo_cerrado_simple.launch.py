@@ -20,7 +20,7 @@ def generate_launch_description():
         package= "control",
         executable= "simple_lazo_cerrado",
         parameters=[
-            {"topic_info","/P1_info"},
+            {"topic_info": "/P1_info"},
             {"topic_command": "/P1"},
             {"referencia": 0.0},
             {"stepPin": 36},
@@ -37,7 +37,7 @@ def generate_launch_description():
         package= "control",
         executable= "simple_lazo_cerrado",
         parameters=[
-            {"topic_info","/P2_info"},
+            {"topic_info": "/P2_info"},
             {"topic_command": "/P2"},
             {"referencia": 0.0},
             {"stepPin": 33},
@@ -54,7 +54,7 @@ def generate_launch_description():
         package= "control",
         executable= "simple_lazo_cerrado",
         parameters=[
-            {"topic_info","/R1_info"},
+            {"topic_info": "/R1_info"},
             {"topic_command": "/R1"},
             {"referencia": 0.0},
             {"stepPin": 19},
@@ -71,7 +71,7 @@ def generate_launch_description():
         package= "control",
         executable= "simple_lazo_cerrado",
         parameters=[
-            {"topic_info","/R2_info"},
+            {"topic_info": "/R2_info"},
             {"topic_command": "/R2"},
             {"referencia": 0.0},
             {"stepPin": 3},
