@@ -72,9 +72,8 @@ class NodeName(Node):
 
     # Control de posicion
     def PID_timer_callback(self):
-
         # Establecer margenes de error, se ponen por 3 grados/cm, por definir 
-        if (self.value < self.referencia + 3 or self.value > self.referencia + 3):
+        if (not(self.value < self.referencia + 3 and self.value > self.referencia - 3)):
             if (self.referencia > self.value):
                 GPIO.output(self.dirPin, True)
             elif (self.referencia < self.value):
