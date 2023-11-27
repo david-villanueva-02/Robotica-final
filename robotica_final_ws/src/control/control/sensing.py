@@ -18,7 +18,7 @@ Sensor || TRIG || ECHO
 class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('Sensing')
-        self.ser = serial.Serial('/dev/ttyACM0',115200)
+        self.ser = serial.Serial('/dev/ttyAMA0',115200)
         self.valor_ang = Float32()
         self.valor_P1 = Float32()
         self.valor_P2 = Float32()
