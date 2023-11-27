@@ -8,16 +8,16 @@ class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('Lazo_cerrado')
          
-        # Command and info parameters, 1 is default 
-        self.declare_parameter("topic_info","/P1_info")
-        self.declare_parameter("topic_command","/P1")
-        self.declare_parameter("referencia",0.0)
+        # Command and info parameters, 3 is default 
+        self.declare_parameter("topic_info","/R1_info")
+        self.declare_parameter("topic_command","/R1")
+        self.declare_parameter("referencia",90.0)
 
-        # Motors pins parameters, 1 is default
-        self.declare_parameter("stepPin",36)
-        self.declare_parameter("dirPin",38)
-        self.declare_parameter("enPin",40)
-        self.declare_parameter("limits",(0.0,180.0))
+        # Motors pins parameters, 3 is default
+        self.declare_parameter("stepPin",19)
+        self.declare_parameter("dirPin",21)
+        self.declare_parameter("enPin",23)
+        self.declare_parameter("limits",(0.0,100.0))
 
         # Parametros PID - por definir
         self.declare_parameter("P_PID",0.0)
