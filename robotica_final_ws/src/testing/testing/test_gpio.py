@@ -1,9 +1,7 @@
 import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
-from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 from std_msgs.msg import String
-
 
 class NodeName(Node):
     def __init__(self) -> None:
