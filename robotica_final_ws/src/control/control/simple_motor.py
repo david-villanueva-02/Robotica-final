@@ -18,10 +18,10 @@ class NodeName(Node):
         print("Nodo inicializado")
 
         # Parametros para cada motor
-        self.declare_parameter("stepPin")
-        self.declare_parameter("dirPin")
-        self.declare_parameter("enPin")
-        self.declare_parameter("motorTopic")
+        self.declare_parameter("stepPin",36)
+        self.declare_parameter("dirPin",38)
+        self.declare_parameter("enPin",40)
+        self.declare_parameter("motorTopic","/P1")
 
         self.stepPin = self.get_parameter("stepPin").value
         self.dirPin = self.get_parameter("dirPin").value
