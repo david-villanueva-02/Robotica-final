@@ -23,9 +23,9 @@ class NodeName(Node):
         self.valor_P1 = Float32()
         self.valor_P2 = Float32()
 
-        self.valor_P1 = 0.0
-        self.valor_P2 = 0.0
-        self.valor_ang = 0.0
+        self.valor_P1.data = 0.0
+        self.valor_P2.data = 0.0
+        self.valor_ang.data = 0.0
 
         GPIO.setmode(GPIO.BOARD)
 
