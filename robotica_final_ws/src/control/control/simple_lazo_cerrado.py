@@ -28,7 +28,6 @@ class NodeName(Node):
         self.stepPin = self.get_parameter("stepPin").value
         self.dirPin = self.get_parameter("dirPin").value
         self.enPin = self.get_parameter("enPin").value
-        self.motorTopic = self.get_parameter("motorTopic").value
         
         # Pins setupt
         GPIO.setmode(GPIO.BOARD)
