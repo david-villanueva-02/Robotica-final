@@ -45,7 +45,7 @@ class NodeName(Node):
 
         self.arduino_timer = self.create_timer(0.01,self.arduino_timer_callback)
         self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
-        #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
+        self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
 
     # Recibe informacion de un arduino
     def arduino_timer_callback(self):
