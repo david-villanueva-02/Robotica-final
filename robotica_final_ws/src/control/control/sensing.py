@@ -85,6 +85,7 @@ class NodeName(Node):
         if (motor == 1):
             self.valor_P1.data = pulse_dur*34300/2
             self.pub_P1.publish(self.valor_P1)
+            print(self.valor_P1)
         elif(motor == 2):
             self.valor_P2.data = pulse_dur*34300/2
             self.pub_P2.publish(self.valor_P2)
