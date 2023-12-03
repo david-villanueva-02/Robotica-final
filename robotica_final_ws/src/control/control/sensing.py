@@ -18,7 +18,7 @@ Sensor || TRIG || ECHO
 class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('Sensing')
-        self.ser = serial.Serial('/dev/ttyAMA0',115200)
+        self.ser = serial.Serial('/dev/ttyUSB0',115200)  # Se puede parametrizar el puerto, revisar 
         self.valor_ang = Float32()
         self.valor_P1 = Float32()
         self.valor_P2 = Float32()
@@ -44,8 +44,8 @@ class NodeName(Node):
         self.pub_R2 = self.create_publisher(Float32, "/R2_info", 10)
 
         self.arduino_timer = self.create_timer(0.01,self.arduino_timer_callback)
-        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback)
-        #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback(13,15,1))
+        #self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
+        #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
 
     # Recibe informacion de un arduino
     def arduino_timer_callback(self):
@@ -67,11 +67,32 @@ class NodeName(Node):
             self.ser.close()
 
     # Lee la distancia de los sensores ultrasonicos
-    def sensor_timer_callback(self):
+    def sensor_timer_callback_1(self):
         trigpin = 16
         echopin = 18
+        motor = 1
+        # Se lanza el pulso 
+        GPIO.output(trigpin,True)
+        sleep(0.00001)
+        GPIO.output(trigpin,False)
+         
+        # Se lee el tiempo
+        while (not(GPIO.input(echopin))) : pulse_start = time()
+        while(GPIO.input(echopin)): pulse_end = time()
+        pulse_dur = pulse_end - pulse_start
+        
+        # Se publica segun el sensor 
+        if (motor == 1):
+            self.valor_P1.data = pulse_dur*34300/2
+            self.pub_P1.publish(self.valor_P1)
+        elif(motor == 2):
+            self.valor_P2.data = pulse_dur*34300/2
+            self.pub_P2.publish(self.valor_P2)
+
+    def sensor_timer_callback_2(self):
+        trigpin = 13
+        echopin = 15
         motor = 2
-        (16,18,2)
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
         sleep(0.00001)
