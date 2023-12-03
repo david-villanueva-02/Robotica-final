@@ -29,7 +29,7 @@ class NodeName(Node):
 
         GPIO.setmode(GPIO.BOARD)
 
-        # Sensor 1
+        # Sensor 1 para P1
         GPIO.setup(13,GPIO.OUT) # TRIG 1
         GPIO.setup(15,GPIO.IN)  # ECHO 1
 
@@ -44,7 +44,7 @@ class NodeName(Node):
         self.pub_R2 = self.create_publisher(Float32, "/R2_info", 10)
 
         self.arduino_timer = self.create_timer(0.01,self.arduino_timer_callback)
-        #self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
+        self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
         #self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
 
     # Recibe informacion de un arduino
@@ -68,8 +68,8 @@ class NodeName(Node):
 
     # Lee la distancia de los sensores ultrasonicos
     def sensor_timer_callback_1(self):
-        trigpin = 16
-        echopin = 18
+        trigpin = 13
+        echopin = 15
         motor = 1
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
@@ -90,8 +90,8 @@ class NodeName(Node):
             self.pub_P2.publish(self.valor_P2)
 
     def sensor_timer_callback_2(self):
-        trigpin = 13
-        echopin = 15
+        trigpin = 16
+        echopin = 18
         motor = 2
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
