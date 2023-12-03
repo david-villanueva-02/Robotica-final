@@ -42,7 +42,7 @@ class NodeName(Node):
         GPIO.output(self.dirPin, True)
 
         self.subscriber_P1 = self.create_subscription(String, self.motorTopic, self.callback_P1,10)
-        self.main_timer = self.create_timer(0.01,self.callback_main_timer)
+        self.main_timer = self.create_timer(0.001,self.callback_main_timer)
     
     def callback_P1(self,msg):
         self.dir = msg.data
@@ -58,7 +58,7 @@ class NodeName(Node):
 
     def callback_main_timer(self): 
         GPIO.output(self.stepPin,True)
-        sleep(0.005)
+        sleep(0.0005)
         GPIO.output(self.stepPin, False)
 
 def main(args=None) -> None:
