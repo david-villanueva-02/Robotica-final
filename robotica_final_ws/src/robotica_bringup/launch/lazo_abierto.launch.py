@@ -20,7 +20,7 @@ def generate_launch_description():
             {"dirPin": 38},
             {"enPin": 40},
             {"motorTopic": "/P1"},
-            {"freq",1000}
+            {"freq": 1000}
         ]
     )
 
@@ -33,7 +33,7 @@ def generate_launch_description():
             {"dirPin": 35},
             {"enPin": 37},
             {"motorTopic": "/P2"},
-            {"freq",1000}
+            {"freq": 1000}
         ]
     )
 
@@ -46,7 +46,7 @@ def generate_launch_description():
             {"dirPin": 21},
             {"enPin": 23},
             {"motorTopic": "/R1"},
-            {"freq",10}
+            {"freq": 10}
         ]
     )
 
@@ -59,7 +59,7 @@ def generate_launch_description():
             {"dirPin": 5},
             {"enPin": 7},
             {"motorTopic": "/R2"},
-            {"freq",10}
+            {"freq": 10}
         ]
     )
 
