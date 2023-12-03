@@ -44,11 +44,11 @@ class NodeName(Node):
                 else: self.message_move.data = ""
 
                 match event.axis:
-                    case 1: # Prismatico 1
+                    case 0: # Prismatico 1
                         self.P1.publish(self.message_move)
-                    case 2: # Revolute 1
+                    case 3: # Revolute 1
                         self.R1.publish(self.message_move)
-                    case 3: # Prismatico 2
+                    case 1: # Prismatico 2
                         self.P2.publish(self.message_move)
                     case 4: # Revolute 2
                         self.R2.publish(self.message_move)
