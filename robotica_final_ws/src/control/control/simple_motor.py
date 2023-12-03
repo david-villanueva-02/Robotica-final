@@ -21,12 +21,14 @@ class NodeName(Node):
         self.declare_parameter("stepPin",36)
         self.declare_parameter("dirPin",38)
         self.declare_parameter("enPin",40)
+        self.declare_parameter("freq",100)
         self.declare_parameter("motorTopic","/P1")
 
         self.stepPin = self.get_parameter("stepPin").value
         self.dirPin = self.get_parameter("dirPin").value
         self.enPin = self.get_parameter("enPin").value
         self.motorTopic = self.get_parameter("motorTopic").value
+        self.periodo = 1/self.get_parameter("freq").value
         
         GPIO.setmode(GPIO.BOARD)
         
@@ -42,7 +44,7 @@ class NodeName(Node):
         GPIO.output(self.dirPin, True)
 
         self.subscriber_P1 = self.create_subscription(String, self.motorTopic, self.callback_P1,10)
-        self.main_timer = self.create_timer(0.001,self.callback_main_timer)
+        self.main_timer = self.create_timer(self.periodo,self.callback_main_timer)
     
     def callback_P1(self,msg):
         self.dir = msg.data
@@ -58,7 +60,7 @@ class NodeName(Node):
 
     def callback_main_timer(self): 
         GPIO.output(self.stepPin,True)
-        sleep(0.0005)
+        sleep(self.periodo/2)
         GPIO.output(self.stepPin, False)
 
 def main(args=None) -> None:

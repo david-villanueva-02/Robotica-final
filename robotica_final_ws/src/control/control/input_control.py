@@ -37,43 +37,22 @@ class NodeName(Node):
     def main_cycle(self):
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
-                match event.axis:
-                    case 1: # Revolute 1
-                        if event.value > 0.8:
-                            self.message_move.data = "Reduce"
-                        elif event.value < -0.8:
-                            self.message_move.data = "Aumenta"
-                        else: self.message_move.data = ""
-                        self.R1.publish(self.message_move)
-                        break
-                    case 4: # Revolute 2
-                        if event.value > 0.8:
-                            self.message_move.data = "Reduce"
-                        elif event.value < -0.8:
-                            self.message_move.data = "Aumenta"
-                        else: self.message_move.data = ""
-                        self.R2.publish(self.message_move)
-                        break
+                if event.value > 0.8:
+                    self.message_move.data = "Reduce"
+                elif event.value < -0.8:
+                    self.message_move.data = "Aumenta"
+                else: self.message_move.data = ""
 
-            elif event.type == pygame.JOYBUTTONDOWN:
-                print("Boton presionado: {}".format(event.button))
-            elif event.type == pygame.JOYBUTTONUP:
-                print("Boton liberado: {}".format(event.button))
-            elif event.type == pygame.JOYHATMOTION:
-                print("HAT direction: {}".format(event.value))
-                print(enumerate(event.value))
-                ## Se puede optimizar 
-                for j, i in enumerate(event.value, start = 0):
-                    self.message_move.data = ""
-                    match i:
-                        case -1:
-                            self.message_move.data = "Reduce"
-                        case 0:
-                            self.message_move.data = ""
-                        case 1:
-                            self.message_move.data = "Aumenta"
-                    if (j): self.P2.publish(self.message_move)
-                    else: self.P1.publish(self.message_move)
+                match event.axis:
+                    case 1: # Prismatico 1
+                        self.P1.publish(self.message_move)
+                    case 2: # Revolute 1
+                        self.R1.publish(self.message_move)
+                    case 3: # Prismatico 2
+                        self.P2.publish(self.message_move)
+                    case 4: # Revolute 2
+                        self.R2.publish(self.message_move)
+                print(f"{event.axis}: {event.value}")
 
 def main(args=None) -> None:
     pygame.init()
