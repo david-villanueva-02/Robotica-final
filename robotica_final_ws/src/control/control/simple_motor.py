@@ -23,12 +23,14 @@ class NodeName(Node):
         self.declare_parameter("enPin",40)
         self.declare_parameter("freq",100)
         self.declare_parameter("motorTopic","/P1")
+        self.declare_parameter("invertir", False)
 
         self.stepPin = self.get_parameter("stepPin").value
         self.dirPin = self.get_parameter("dirPin").value
         self.enPin = self.get_parameter("enPin").value
         self.motorTopic = self.get_parameter("motorTopic").value
         self.periodo = 1/self.get_parameter("freq").value
+        self.invertir = self.get_parameter("invertir").value
         
         GPIO.setmode(GPIO.BOARD)
         
@@ -40,8 +42,8 @@ class NodeName(Node):
         GPIO.setup(self.dirPin, GPIO.OUT)  # Dir Pin - controls direction
         GPIO.setup(self.enPin, GPIO.OUT)   # Enable pin 
 
-        GPIO.output(self.enPin,False)      # Enables with value 0
-        GPIO.output(self.dirPin, True)
+        GPIO.output(self.enPin,True)      # Enables with value 0
+        GPIO.output(self.dirPin, self.invertir)
 
         self.subscriber_P1 = self.create_subscription(String, self.motorTopic, self.callback_P1,10)
         self.main_timer = self.create_timer(self.periodo,self.callback_main_timer)
@@ -49,9 +51,9 @@ class NodeName(Node):
     def callback_P1(self,msg):
         self.dir = msg.data
         if self.dir == "Aumenta":
-            GPIO.output(self.dirPin, True)
+            GPIO.output(self.dirPin, not(self.invertir))
         elif self.dir == "Reduce":
-            GPIO.output(self.dirPin, False)
+            GPIO.output(self.dirPin, self.invertir)
         
         if self.dir == "":
             GPIO.output(self.enPin,True)

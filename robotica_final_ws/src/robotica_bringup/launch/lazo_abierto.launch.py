@@ -33,7 +33,8 @@ def generate_launch_description():
             {"dirPin": 35},
             {"enPin": 37},
             {"motorTopic": "/P2"},
-            {"freq": 1000}
+            {"freq": 1000},
+            {"invertir": True}
         ]
     )
 
