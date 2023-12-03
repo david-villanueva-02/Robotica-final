@@ -52,7 +52,8 @@ class NodeName(Node):
                         self.P2.publish(self.message_move)
                     case 4: # Revolute 2
                         self.R2.publish(self.message_move)
-                print(f"{event.axis}: {event.value}")
+                if event.value > 0.8 or event.value < -0.8:
+                    print(f"{event.axis}: {event.value}")
 
 def main(args=None) -> None:
     pygame.init()
