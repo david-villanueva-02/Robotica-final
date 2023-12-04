@@ -94,6 +94,7 @@ class NodeName(Node):
         # Se publica segun el sensor 
         self.valor_P1.data = pulse_dur*34300/2
         self.pub_P1.publish(self.valor_P1)
+        print(self.valor_P1.data)
 
     def sensor_timer_callback_2(self):
         trigpin = 16
@@ -112,6 +113,8 @@ class NodeName(Node):
         # Se publica segun el sensor 
         self.valor_P2.data = pulse_dur*34300/2
         self.pub_P2.publish(self.valor_P2)
+        print(self.valor_P2.data)
+        
 
 def main(args=None) -> None:
     rclpy.init(args=args)
