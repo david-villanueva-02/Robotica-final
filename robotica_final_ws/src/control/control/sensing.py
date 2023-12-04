@@ -80,7 +80,7 @@ class NodeName(Node):
     def sensor_timer_callback_1(self):
         trigpin = 13
         echopin = 15
-        motor = 1
+         
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
         sleep(0.00001)
@@ -92,17 +92,13 @@ class NodeName(Node):
         pulse_dur = pulse_end - pulse_start
         
         # Se publica segun el sensor 
-        if (motor == 1):
-            self.valor_P1.data = pulse_dur*34300/2
-            self.pub_P1.publish(self.valor_P1)
-        elif(motor == 2):
-            self.valor_P2.data = pulse_dur*34300/2
-            self.pub_P2.publish(self.valor_P2)
+        self.valor_P1.data = pulse_dur*34300/2
+        self.pub_P1.publish(self.valor_P1)
 
     def sensor_timer_callback_2(self):
         trigpin = 16
         echopin = 18
-        motor = 2
+        
         # Se lanza el pulso 
         GPIO.output(trigpin,True)
         sleep(0.00001)
@@ -114,12 +110,8 @@ class NodeName(Node):
         pulse_dur = pulse_end - pulse_start
         
         # Se publica segun el sensor 
-        if (motor == 1):
-            self.valor_P1.data = pulse_dur*34300/2
-            self.pub_P1.publish(self.valor_P1)
-        elif(motor == 2):
-            self.valor_P2.data = pulse_dur*34300/2
-            self.pub_P2.publish(self.valor_P2)
+        self.valor_P2.data = pulse_dur*34300/2
+        self.pub_P2.publish(self.valor_P2)
 
 def main(args=None) -> None:
     rclpy.init(args=args)
