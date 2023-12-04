@@ -54,16 +54,12 @@ class NodeName(Node):
             GPIO.output(self.dirPin, not(self.invertir))
         elif self.dir == "Reduce":
             GPIO.output(self.dirPin, self.invertir)
-        
-        if self.dir == "":
-            GPIO.output(self.enPin,True)
-        else:
-            GPIO.output(self.enPin,False)
 
     def callback_main_timer(self): 
-        GPIO.output(self.stepPin,True)
-        sleep(self.periodo/2)
-        GPIO.output(self.stepPin, False)
+        if self.dir == "Aumenta" or self.dir == "Reduce":
+            GPIO.output(self.stepPin,True)
+            sleep(self.periodo/2)
+            GPIO.output(self.stepPin, False)
 
 def main(args=None) -> None:
     rclpy.init(args=args)

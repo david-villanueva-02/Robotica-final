@@ -50,7 +50,8 @@ def generate_launch_description():
             {"I_PID": 10000.0},
             {"D_PID:": 0},
             {"tolerancia": 0.5},
-            {"step":0.5}
+            {"step":0.5},
+            {"invertir": True}
         ]
     )
 
