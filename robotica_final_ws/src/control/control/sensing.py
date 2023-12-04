@@ -19,13 +19,15 @@ class NodeName(Node):
     def __init__(self) -> None:
         super().__init__('Sensing')
         self.ser = serial.Serial('/dev/ttyUSB0',115200)  # Se puede parametrizar el puerto, revisar 
-        self.valor_ang = Float32()
+        self.valor_R1 = Float32()
         self.valor_P1 = Float32()
         self.valor_P2 = Float32()
+        self.valor_R2 = Float32()
 
         self.valor_P1.data = 0.0
         self.valor_P2.data = 0.0
-        self.valor_ang.data = 0.0
+        self.valor_R1.data = 0.0
+        self.valor_R2.data = 0.0
 
         GPIO.setmode(GPIO.BOARD)
 
@@ -47,6 +49,14 @@ class NodeName(Node):
         self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
         self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
 
+        self.timer_show = self.create_timer(1,self.show_params)
+
+    def show_params(self):
+        print(f"P1: {self.valor_P1.data}")
+        print(f"P2: {self.valor_P2.data}")
+        print(f"R1: {self.valor_R1.data}")
+        print(f"R1: {self.valor_R2.data}")
+
     # Recibe informacion de un arduino
     def arduino_timer_callback(self):
         try:
@@ -54,14 +64,14 @@ class NodeName(Node):
                 data = self.ser.readline().decode('utf-8').rstrip()
                 angles = data.split(",")
                 if len(angles) == 2:
-                    self.valor_ang.data = float(angles[0])
-                    self.pub_R1.publish(self.valor_ang)
+                    self.valor_R1.data = float(angles[0])
+                    self.pub_R1.publish(self.valor_R1)
 
-                    self.valor_ang.data = float(angles[1])
-                    self.pub_R2.publish(self.valor_ang)
+                    self.valor_R2.data = float(angles[1])
+                    self.pub_R2.publish(self.valor_R2)
                     
                     # Imprimir los angulos
-                    self.get_logger().info(f"angle_1: {angles[0]}, angle_2: {angles[1]}")
+                    # self.get_logger().info(f"angle_1: {angles[0]}, angle_2: {angles[1]}")
                     
         except KeyboardInterrupt:
             self.ser.close()
@@ -110,8 +120,6 @@ class NodeName(Node):
         elif(motor == 2):
             self.valor_P2.data = pulse_dur*34300/2
             self.pub_P2.publish(self.valor_P2)
-            print(self.valor_P2)
-        
 
 def main(args=None) -> None:
     rclpy.init(args=args)

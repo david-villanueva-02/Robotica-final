@@ -22,14 +22,16 @@ def generate_launch_description():
         parameters=[
             {"topic_info": "/P1_info"},
             {"topic_command": "/P1"},
-            {"referencia": 0.0},
+            {"referencia": 16.0},
             {"stepPin": 36},
             {"dirPin": 38},
             {"enPin": 40},
-            {"limits": (0.0,30.0)},
+            {"limits": (3.6,27.1)},
             {"P_PID":0.0},
             {"I_PID": 10000.0},
-            {"D_PID:": 0}
+            {"D_PID:": 0},
+            {"tolerancia": 0.5},
+            {"step":0.5}
         ]
     )
 
@@ -39,14 +41,16 @@ def generate_launch_description():
         parameters=[
             {"topic_info": "/P2_info"},
             {"topic_command": "/P2"},
-            {"referencia": 0.0},
+            {"referencia": 15.0},
             {"stepPin": 33},
             {"dirPin": 35},
             {"enPin": 37},
-            {"limits": (0.0,100.0)},
+            {"limits": (3.5,18.0)},
             {"P_PID":0.0},
             {"I_PID": 10000.0},
-            {"D_PID:": 0}
+            {"D_PID:": 0},
+            {"tolerancia": 0.5},
+            {"step":0.5}
         ]
     )
 
@@ -63,7 +67,8 @@ def generate_launch_description():
             {"limits": (0.0,180.0)},
             {"P_PID":0.0},
             {"I_PID": 10000.0},
-            {"D_PID:": 0}
+            {"D_PID:": 0},
+            {"tolerancia": 2.0}
         ]
     )
 
@@ -80,7 +85,8 @@ def generate_launch_description():
             {"limits": (0.0,180.0)},
             {"P_PID":0.0},
             {"I_PID": 10000.0},
-            {"D_PID:": 0}
+            {"D_PID:": 0},
+            {"tolerancia": 2.0}
         ]
     )
 

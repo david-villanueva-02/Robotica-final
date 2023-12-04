@@ -12,6 +12,9 @@ class NodeName(Node):
         self.declare_parameter("topic_info","/R1_info")
         self.declare_parameter("topic_command","/R1")
         self.declare_parameter("referencia",90.0)
+        self.declare_parameter("invertir",False)
+        self.declare_parameter("tolerancia",3.0)
+        self.declare_parameter("step",1.0)
 
         # Motors pins parameters, 3 is default
         self.declare_parameter("stepPin",19)
@@ -28,6 +31,9 @@ class NodeName(Node):
         self.stepPin = self.get_parameter("stepPin").value
         self.dirPin = self.get_parameter("dirPin").value
         self.enPin = self.get_parameter("enPin").value
+        self.invertir = self.get_parameter("invertir").value
+        self.tolerancia = self.get_parameter("tolerancia").value
+        self.step = self.get_parameter("step").value
         
         # Pins setupt
         GPIO.setmode(GPIO.BOARD)
@@ -36,7 +42,7 @@ class NodeName(Node):
         GPIO.setup(self.enPin, GPIO.OUT)   # Enable pin 
 
         GPIO.output(self.enPin,False)      # Enables with value 0
-        self.dir = True
+        self.dir = not(self.invertir)
         GPIO.output(self.dirPin, self.dir) # Sets a direction
 
         self.topic_info = self.get_parameter("topic_info").value        # Sensado 
@@ -56,10 +62,10 @@ class NodeName(Node):
         self.PID_timer = self.create_timer(0.001,self.PID_timer_callback)
 
     def referencia_timer_callback(self): 
-        if (self.command == "Aumenta" and self.referencia + 1 < self.limits[0]):
-            self.referencia += 1.0
-        elif (self.command == "Reduce" and self.referencia - 1 > self.limits[1]):
-            self.referencia -= 1.0
+        if (self.command == "Aumenta" and self.referencia + self.step < self.limits[0]):
+            self.referencia += self.step
+        elif (self.command == "Reduce" and self.referencia - self.step > self.limits[1]):
+            self.referencia -= self.step
 
     # Actualiza el valor de la PV
     def info_callback(self,msg):
@@ -72,11 +78,11 @@ class NodeName(Node):
     # Control de posicion
     def PID_timer_callback(self):
         # Establecer margenes de error, se ponen por 3 grados/cm, por definir 
-        if (not(self.value < self.referencia + 3 and self.value > self.referencia - 3)):
+        if (not(self.value < self.referencia + self.tolerancia and self.value > self.referencia - self.tolerancia)):
             if (self.referencia > self.value):
-                GPIO.output(self.dirPin, True)
+                GPIO.output(self.dirPin, not(self.invertir))
             elif (self.referencia < self.value):
-                GPIO.output(self.dirPin, False)
+                GPIO.output(self.dirPin, self.invertir)
             GPIO.output(self.stepPin,True)
             sleep(0.0005)
             GPIO.output(self.stepPin,False)
