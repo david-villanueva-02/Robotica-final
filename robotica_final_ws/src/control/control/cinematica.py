@@ -75,11 +75,11 @@ class NodeName(Node):
                 valid_R1 = self.R1_value.data > self.R1_referencia.data - 3.0 and self.R1_value.data < self.R1_referencia.data + 3.0
                 valid_R2 = self.R2_value.data > self.R2_referencia.data - 3.0 and self.R2_value.data < self.R2_referencia.data + 3.0
             '''
-            
+
             # Cinematica directa
-            X = -math.sin(math.degrees(self.R1_value.data))*(L3 + L4*math.sin(math.degrees(self.R2_value.data)))
-            Y = L2 + self.P1_value.data + L3*math.cos(math.degrees(self.R1_value.data)) + L4*math.cos(math.degrees(self.R1_value.data))*math.sin(math.degrees(self.R2_value.data))
-            Z = L1 + self.P2_value.data - L4*math.cos(math.degrees(self.R2_value.data))
+            X = -math.sin(math.degrees(self.R1_referencia.data))*(L3 + L4*math.sin(math.degrees(self.R2_referencia.data)))
+            Y = L2 + self.P1_referencia.data + L3*math.cos(math.degrees(self.R1_referencia.data)) + L4*math.cos(math.degrees(self.R1_referencia.data))*math.sin(math.degrees(self.R2_referencia.data))
+            Z = L1 + self.P2_referencia.data - L4*math.cos(math.degrees(self.R2_referencia.data))
 
             print(f"Coordenadas: ({X}, {Y}, {Z})")
 
