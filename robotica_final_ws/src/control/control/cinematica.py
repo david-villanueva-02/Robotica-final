@@ -47,7 +47,7 @@ class NodeName(Node):
             self.P1_referencia.data = P1
 
             P2 = float(input("Valor para P2: "))
-            while (P2 < 0.0 or P2 > 14.5): P1 = float(input("Error, valor para P2: "))
+            while (P2 < 0.0 or P2 > 14.5): P2 = float(input("Error, valor para P2: "))
             self.P2_referencia.data = P2
 
             R1 = float(input("Valor para P2: "))
