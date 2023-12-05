@@ -7,13 +7,11 @@ def generate_launch_description():
     sensing = Node(
         package="control",
         executable="sensing",
-        name="sensing_node",
     )
 
     input_controller = Node(
         package= "control",
         executable= "input_control",
-        name="input_controller"
     )
 
     motor_1 = Node(
