@@ -26,7 +26,7 @@ def generate_launch_description():
             {"stepPin": 36},
             {"dirPin": 38},
             {"enPin": 40},
-            {"limits": (3.6,27.1)},
+            {"limits": (3.0,27.0)},
             {"P_PID":0.0},
             {"I_PID": 10000.0},
             {"D_PID:": 0},
