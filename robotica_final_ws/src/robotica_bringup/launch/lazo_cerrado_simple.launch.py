@@ -4,11 +4,12 @@ from launch_ros.actions import Node
 def generate_launch_description():
     ld = LaunchDescription()
 
+    '''
     sensing = Node(
         package="control",
         executable="sensing",
     )
-
+    '''
     input_controller = Node(
         package= "control",
         executable= "input_control",
@@ -90,7 +91,7 @@ def generate_launch_description():
         executable="actuador"
     )
 
-    ld.add_action(sensing)
+    #ld.add_action(sensing)
     ld.add_action(input_controller)
     ld.add_action(motor_1)
     ld.add_action(motor_2)
