@@ -50,11 +50,11 @@ class NodeName(Node):
             while (P2 < 0.0 or P2 > 14.5): P2 = float(input("Error, valor para P2: "))
             self.P2_referencia.data = P2
 
-            R1 = float(input("Valor para P2: "))
+            R1 = float(input("Valor para R1: "))
             while (R1 < -90.0 or R1 > 90.0): R1 = float(input("Error, valor para R1: "))
             self.P2_referencia.data = R1
             
-            R2 = float(input("Valor para P2: "))
+            R2 = float(input("Valor para R2: "))
             while (R2 < -90.0 or R2 > 0.0): R2 = float(input("Error, valor para R2: "))
             self.P2_referencia.data = R2
 
