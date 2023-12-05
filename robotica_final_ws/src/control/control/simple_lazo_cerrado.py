@@ -16,6 +16,7 @@ class NodeName(Node):
         self.declare_parameter("tolerancia",3.0)
         self.declare_parameter("step",1.0)
         self.declare_parameter("freq",100)
+        self.declare_parameter("topic_referencia","/R1_referencia")
 
         # Motors pins parameters, 3 is default
         self.declare_parameter("stepPin",19)
@@ -36,6 +37,7 @@ class NodeName(Node):
         self.tolerancia = self.get_parameter("tolerancia").value
         self.step = self.get_parameter("step").value
         self.periodo = 1/self.get_parameter("freq").value
+        self.topic_referencia = self.get_parameter("topic_referencia").value
         
         # Pins setupt
         GPIO.setmode(GPIO.BOARD)
@@ -57,6 +59,7 @@ class NodeName(Node):
 
         self.sub_info = self.create_subscription(Float32,self.topic_info,self.info_callback,10)
         self.sub_command = self.create_subscription(String, self.topic_command,self.command_callback,10)
+        self.update_referencia = self.create_subscription(Float32,self.topic_referencia,self.update_referencia,10)
 
         # Timer para mover la referencia 1 unidad / segundo
         self.main_timer = self.create_timer(1,self.referencia_timer_callback)
@@ -81,13 +84,16 @@ class NodeName(Node):
     def PID_timer_callback(self):
         # Establecer margenes de error, se ponen por 3 grados/cm, por definir 
         if (not(self.value < self.referencia + self.tolerancia and self.value > self.referencia - self.tolerancia)):
-            if (self.referencia > self.value):
+            if (self.referencia > self.value and self.value < self.limits[1]):
                 GPIO.output(self.dirPin, not(self.invertir))
-            elif (self.referencia < self.value):
+            elif (self.referencia < self.value and self.value > self.limits[0]):
                 GPIO.output(self.dirPin, self.invertir)
             GPIO.output(self.stepPin,True)
             sleep(self.periodo/2)
             GPIO.output(self.stepPin,False)
+
+    def update_referencia(self,msg):
+        self.referencia = msg.data
         
 def pinesCleanup():
     GPIO.cleanup(7)

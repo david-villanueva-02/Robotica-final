@@ -62,7 +62,7 @@ def generate_launch_description():
             {"stepPin": 19},
             {"dirPin": 21},
             {"enPin": 23},
-            {"limits": [0.0,180.0]},
+            {"limits": [-90.0,90.0]},
             {"tolerancia": 2.0},
             {"freq": 100}
         ]
@@ -79,7 +79,7 @@ def generate_launch_description():
             {"stepPin": 3},
             {"dirPin": 5},
             {"enPin": 7},
-            {"limits": [0.0,180.0]},
+            {"limits": [-90.0,0.0]},
             {"tolerancia": 2.0},
             {"freq": 100}
         ]
