@@ -19,6 +19,7 @@ def generate_launch_description():
     motor_1 = Node(
         package= "control",
         executable= "simple_lazo_cerrado",
+        name="motor_1",
         parameters=[
             {"topic_info": "/P1_info"},
             {"topic_command": "/P1"},
@@ -38,6 +39,7 @@ def generate_launch_description():
     motor_2 = Node(
         package= "control",
         executable= "simple_lazo_cerrado",
+        name="motor_2",
         parameters=[
             {"topic_info": "/P2_info"},
             {"topic_command": "/P2"},
@@ -58,6 +60,7 @@ def generate_launch_description():
     motor_3 = Node(
         package= "control",
         executable= "simple_lazo_cerrado",
+        name="motor_3",
         parameters=[
             {"topic_info": "/R1_info"},
             {"topic_command": "/R1"},
@@ -76,6 +79,7 @@ def generate_launch_description():
     motor_4 = Node(
         package= "control",
         executable= "simple_lazo_cerrado",
+        name="motor_4",
         parameters=[
             {"topic_info": "/R2_info"},
             {"topic_command": "/R2"},
@@ -91,6 +95,10 @@ def generate_launch_description():
         ]
     )
 
+    actuador = Node(
+        package="control",
+        executable="actuador"
+    )
 
     ld.add_action(sensing)
     ld.add_action(input_controller)
@@ -98,4 +106,5 @@ def generate_launch_description():
     ld.add_action(motor_2)
     ld.add_action(motor_3)
     ld.add_action(motor_4)
+    ld.add_action(actuador)
     return ld

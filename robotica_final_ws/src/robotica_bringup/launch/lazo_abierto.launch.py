@@ -64,10 +64,16 @@ def generate_launch_description():
         ]
     )
 
+    actuador = Node(
+        package="control",
+        executable="actuador"
+    )
+
     ld.add_action(input_controller)
     ld.add_action(motor_1)
     ld.add_action(motor_2)
     ld.add_action(motor_3)
     ld.add_action(motor_4)
+    ld.add_action(actuador)
 
     return ld
