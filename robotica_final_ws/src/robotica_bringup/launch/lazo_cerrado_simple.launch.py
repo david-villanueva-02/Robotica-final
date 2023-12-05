@@ -26,11 +26,9 @@ def generate_launch_description():
             {"dirPin": 38},
             {"enPin": 40},
             {"limits": (3.0,27.0)},
-            {"P_PID":0.0},
-            {"I_PID": 10000.0},
-            {"D_PID:": 0},
             {"tolerancia": 0.5},
-            {"step":0.5}
+            {"step":0.5},
+            {"freq": 1000}
         ]
     )
 
@@ -46,12 +44,10 @@ def generate_launch_description():
             {"dirPin": 35},
             {"enPin": 37},
             {"limits": (3.5,18.0)},
-            {"P_PID":0.0},
-            {"I_PID": 10000.0},
-            {"D_PID:": 0},
             {"tolerancia": 0.5},
             {"step":0.5},
-            {"invertir": True}
+            {"invertir": True},
+            {"freq": 1000}
         ]
     )
 
@@ -67,10 +63,8 @@ def generate_launch_description():
             {"dirPin": 21},
             {"enPin": 23},
             {"limits": (0.0,180.0)},
-            {"P_PID":0.0},
-            {"I_PID": 10000.0},
-            {"D_PID:": 0},
-            {"tolerancia": 2.0}
+            {"tolerancia": 2.0},
+            {"freq": 100}
         ]
     )
 
@@ -86,10 +80,8 @@ def generate_launch_description():
             {"dirPin": 5},
             {"enPin": 7},
             {"limits": (0.0,180.0)},
-            {"P_PID":0.0},
-            {"I_PID": 10000.0},
-            {"D_PID:": 0},
-            {"tolerancia": 2.0}
+            {"tolerancia": 2.0},
+            {"freq": 100}
         ]
     )
 

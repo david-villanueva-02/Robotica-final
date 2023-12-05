@@ -15,6 +15,7 @@ class NodeName(Node):
         self.declare_parameter("invertir",False)
         self.declare_parameter("tolerancia",3.0)
         self.declare_parameter("step",1.0)
+        self.declare_parameter("freq",100)
 
         # Motors pins parameters, 3 is default
         self.declare_parameter("stepPin",19)
@@ -34,6 +35,7 @@ class NodeName(Node):
         self.invertir = self.get_parameter("invertir").value
         self.tolerancia = self.get_parameter("tolerancia").value
         self.step = self.get_parameter("step").value
+        self.periodo = 1/self.get_parameter("freq").value
         
         # Pins setupt
         GPIO.setmode(GPIO.BOARD)
@@ -59,7 +61,7 @@ class NodeName(Node):
         # Timer para mover la referencia 1 unidad / segundo
         self.main_timer = self.create_timer(1,self.referencia_timer_callback)
 
-        self.PID_timer = self.create_timer(0.001,self.PID_timer_callback)
+        self.PID_timer = self.create_timer(self.periodo,self.PID_timer_callback)
 
     def referencia_timer_callback(self): 
         if (self.command == "Aumenta" and self.referencia + self.step < self.limits[0]):
@@ -84,7 +86,7 @@ class NodeName(Node):
             elif (self.referencia < self.value):
                 GPIO.output(self.dirPin, self.invertir)
             GPIO.output(self.stepPin,True)
-            sleep(0.0005)
+            sleep(self.periodo/2)
             GPIO.output(self.stepPin,False)
         
 def pinesCleanup():
