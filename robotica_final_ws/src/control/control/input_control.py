@@ -19,8 +19,12 @@ class NodeName(Node):
         self.P2 = self.create_publisher(String,"/P2",10)
         self.R1 = self.create_publisher(String,"/R1",10)
         self.R2 = self.create_publisher(String,"/R2",10)
+        self.actuador = self.create_publisher(String,"/Actuador",10)
+
         self.message_move = String()
         self.message_move.data = ""
+        self.message_actuador = String()
+        self.message_actuador.data = ""
         if self.get_counter == 0:
             print("Control no encontrado")
         else:
@@ -56,7 +60,10 @@ class NodeName(Node):
                     print(f"{event.axis}: {event.value}")
             elif event.type == pygame.JOYBUTTONDOWN:
                 button = event.button
+                if event.button == 0: self.message_actuador.data = "Cerrar"
+                elif event.button == 1: self.message_actuador.data = "Abrir"
                 print(f"Button {button} pressed")
+                self.actuador.publish(self.message_actuador)
 
 def main(args=None) -> None:
     pygame.init()
