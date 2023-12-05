@@ -52,11 +52,11 @@ class NodeName(Node):
 
             R1 = float(input("Valor para R1: "))
             while (R1 < -90.0 or R1 > 90.0): R1 = float(input("Error, valor para R1: "))
-            self.P2_referencia.data = R1
+            self.R1_referencia.data = R1
             
             R2 = float(input("Valor para R2: "))
             while (R2 < -90.0 or R2 > 0.0): R2 = float(input("Error, valor para R2: "))
-            self.P2_referencia.data = R2
+            self.R2_referencia.data = R2
 
             self.P1_referencia_pub.publish(self.P1_referencia)
             self.P2_referencia_pub.publish(self.P2_referencia)
