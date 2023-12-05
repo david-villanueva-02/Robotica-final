@@ -21,7 +21,7 @@ class NodeName(Node):
         self.declare_parameter("stepPin",19)
         self.declare_parameter("dirPin",21)
         self.declare_parameter("enPin",23)
-        self.declare_parameter("limits",(0.0,100.0))
+        self.declare_parameter("limits",[0.0,100.0])
 
         # Parametros PID - por definir
         self.declare_parameter("P_PID",0.0)

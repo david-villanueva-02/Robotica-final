@@ -4,12 +4,11 @@ from launch_ros.actions import Node
 def generate_launch_description():
     ld = LaunchDescription()
 
-    '''
     sensing = Node(
         package="control",
         executable="sensing",
     )
-    '''
+    
     input_controller = Node(
         package= "control",
         executable= "input_control",
@@ -26,7 +25,7 @@ def generate_launch_description():
             {"stepPin": 36},
             {"dirPin": 38},
             {"enPin": 40},
-            {"limits": (3.0,27.0)},
+            {"limits": [3.0,27.0]},
             {"tolerancia": 0.5},
             {"step":0.5},
             {"freq": 1000}
@@ -44,7 +43,7 @@ def generate_launch_description():
             {"stepPin": 33},
             {"dirPin": 35},
             {"enPin": 37},
-            {"limits": (3.5,18.0)},
+            {"limits": [3.5,18.0]},
             {"tolerancia": 0.5},
             {"step":0.5},
             {"invertir": True},
@@ -63,7 +62,7 @@ def generate_launch_description():
             {"stepPin": 19},
             {"dirPin": 21},
             {"enPin": 23},
-            {"limits": (0.0,180.0)},
+            {"limits": [0.0,180.0]},
             {"tolerancia": 2.0},
             {"freq": 100}
         ]
@@ -80,7 +79,7 @@ def generate_launch_description():
             {"stepPin": 3},
             {"dirPin": 5},
             {"enPin": 7},
-            {"limits": (0.0,180.0)},
+            {"limits": [0.0,180.0]},
             {"tolerancia": 2.0},
             {"freq": 100}
         ]
@@ -91,7 +90,7 @@ def generate_launch_description():
         executable="actuador"
     )
 
-    #ld.add_action(sensing)
+    ld.add_action(sensing)
     ld.add_action(input_controller)
     ld.add_action(motor_1)
     ld.add_action(motor_2)
