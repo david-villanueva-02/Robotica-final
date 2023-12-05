@@ -54,6 +54,9 @@ class NodeName(Node):
                         self.R2.publish(self.message_move)
                 if event.value > 0.8 or event.value < -0.8:
                     print(f"{event.axis}: {event.value}")
+            elif event.type == pygame.JOYBUTTONDOWN:
+                button = event.button
+                print(f"Button {button} pressed")
 
 def main(args=None) -> None:
     pygame.init()

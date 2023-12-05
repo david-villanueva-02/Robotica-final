@@ -23,7 +23,8 @@ setup(
             'sensing = control.sensing:main',
             'input_control = control.input_control:main',
             'simple_motor = control.simple_motor:main',
-            'simple_lazo_cerrado = control.simple_lazo_cerrado:main'
+            'simple_lazo_cerrado = control.simple_lazo_cerrado:main',
+            'actuador = contorl.actuador:main'
         ],
     },
 )
