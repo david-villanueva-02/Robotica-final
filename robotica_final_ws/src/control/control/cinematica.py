@@ -63,7 +63,6 @@ class NodeName(Node):
             self.R1_referencia_pub.publish(self.R1_referencia)
             self.R2_referencia_pub.publish(self.R2_referencia)
             
-            '''
             valid_P1 = self.P1_value.data > self.P1_referencia.data - 0.5 and self.P1_value.data < self.P1_referencia.data + 0.5
             valid_P2 = self.P2_value.data > self.P2_referencia.data - 0.5 and self.P2_value.data < self.P2_referencia.data + 0.5
             valid_R1 = self.R1_value.data > self.R1_referencia.data - 3.0 and self.R1_value.data < self.R1_referencia.data + 3.0
@@ -74,7 +73,7 @@ class NodeName(Node):
                 valid_P2 = self.P2_value.data > self.P2_referencia.data - 0.5 and self.P2_value.data < self.P2_referencia.data + 0.5
                 valid_R1 = self.R1_value.data > self.R1_referencia.data - 3.0 and self.R1_value.data < self.R1_referencia.data + 3.0
                 valid_R2 = self.R2_value.data > self.R2_referencia.data - 3.0 and self.R2_value.data < self.R2_referencia.data + 3.0
-            '''
+            
 
             # Cinematica directa
             X = -math.sin(math.degrees(self.R1_referencia.data))*(L3 + L4*math.sin(math.degrees(self.R2_referencia.data)))
