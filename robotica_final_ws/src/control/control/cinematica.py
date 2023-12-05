@@ -40,22 +40,22 @@ class NodeName(Node):
     def input_refs(self):
         print("Directa = 1")
         print("Inversa = 2")
-        modalidad = input("Modalidad?: ")
+        modalidad = int(input("Modalidad?: "))
         if modalidad == 1: #Calculo de las coordenadas de cinematica directa
-            P1 = input("Valor para P1: ")
-            while (P1 < 0.0 or P1 > 24.0): P1 = input("Error, valor para P1: ")
+            P1 = float(input("Valor para P1: "))
+            while (P1 < 0.0 or P1 > 24.0): P1 = float(input("Error, valor para P1: "))
             self.P1_referencia.data = P1
 
-            P2 = input("Valor para P2: ")
+            P2 = float(input("Valor para P2: "))
             while (P2 < 0.0 or P2 > 14.5): P1 = input("Error, valor para P2: ")
             self.P2_referencia.data = P2
 
-            R1 = input("Valor para P2: ")
-            while (R1 < -90.0 or R1 > 90.0): R1 = input("Error, valor para R1: ")
+            R1 = float(input("Valor para P2: "))
+            while (R1 < -90.0 or R1 > 90.0): R1 = float(input("Error, valor para R1: "))
             self.P2_referencia.data = R1
             
-            R2 = input("Valor para P2: ")
-            while (R2 < -90.0 or R2 > 0.0): R2 = input("Error, valor para R2: ")
+            R2 = float(input("Valor para P2: "))
+            while (R2 < -90.0 or R2 > 0.0): R2 = float(input("Error, valor para R2: "))
             self.P2_referencia.data = R2
 
             self.P1_referencia_pub.publish(self.P1_referencia)
