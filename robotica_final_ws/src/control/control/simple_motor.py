@@ -42,7 +42,7 @@ class NodeName(Node):
         GPIO.setup(self.dirPin, GPIO.OUT)  # Dir Pin - controls direction
         GPIO.setup(self.enPin, GPIO.OUT)   # Enable pin 
 
-        GPIO.output(self.enPin,True)      # Enables with value 0
+        GPIO.output(self.enPin,False)      # Enables with value 0
         GPIO.output(self.dirPin, self.invertir)
 
         self.subscriber_P1 = self.create_subscription(String, self.motorTopic, self.callback_P1,10)
