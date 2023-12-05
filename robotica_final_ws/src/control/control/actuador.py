@@ -12,19 +12,27 @@ class NodeName(Node):
         # Create Publishers
      
         # Create Subscribers
-
-        # Initialize attributes
-        self.state = True
+        self.actuador_command = self.create_subscription(String,"/Actuador",self.actuador_command_update,10)
 
         GPIO.setmode(GPIO.BOARD) # Modo pines fisicos
-        GPIO.setup(7,GPIO.OUT)
-        self.timer_gpio = self.create_timer(1,self.timer_callback)
-        # Create timers
-    
-    def timer_callback(self):
-        self.state = not(self.state)
-        GPIO.output(7,self.state)
-    # Create callback methods (subscribers and timers)
+        GPIO.setup(32,GPIO.OUT)  # Salida PWM para el servo
+
+        self.pwm = GPIO.PWM(32,50)
+        self.pwm.start(0)
+
+    def actuador_command_update(self,msg):
+        if msg.data == "Abrir":
+            self.set_angle(0)
+        elif msg.data == "Cerrar":
+            self.set_angle(90)
+
+    def set_angle(self,angle):
+        duty = angle / 18 + 2
+        GPIO.output(32,True)
+        self.pwm.ChangeDutyCycle(duty)
+        sleep(1)
+        GPIO.output(32,False)
+        self.pwm.ChangeDutyCycle(0)
        
 def pinesCleanup():
     GPIO.cleanup(7)
