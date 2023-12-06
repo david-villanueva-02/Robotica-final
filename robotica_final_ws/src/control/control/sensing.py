@@ -49,7 +49,7 @@ class NodeName(Node):
         self.sensor1_timer = self.create_timer(0.01,self.sensor_timer_callback_1)
         self.sensor2_timer = self.create_timer(0.01,self.sensor_timer_callback_2)
 
-        self.timer_show = self.create_timer(1,self.show_params)
+        #self.timer_show = self.create_timer(1,self.show_params)
 
     def show_params(self):
         print(f"P1: {self.valor_P1.data}")
