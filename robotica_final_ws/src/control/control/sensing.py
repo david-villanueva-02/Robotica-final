@@ -69,7 +69,7 @@ class NodeName(Node):
                     self.valor_R1.data = 12.43*float(angles[0]) - 623.66
                     self.pub_R1.publish(self.valor_R1)
 
-                    self.valor_R2.data = float(angles[1])
+                    self.valor_R2.data = float(angles[1])*90/100*(-1)
                     self.pub_R2.publish(self.valor_R2)
                     
                     # Imprimir los angulos
