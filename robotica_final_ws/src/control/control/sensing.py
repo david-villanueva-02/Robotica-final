@@ -65,8 +65,8 @@ class NodeName(Node):
                 angles = data.split(",")
                 if len(angles) == 2:
                     # Conversion al angulo real 
-                    #self.valor_R1.data = float(angles[0]) 
-                    self.valor_R1.data = 12.43*float(angles[0]) - 623.66
+                    self.valor_R1.data = float(angles[0]) 
+                    #self.valor_R1.data = 12.43*float(angles[0]) - 623.66
                     self.pub_R1.publish(self.valor_R1)
 
                     self.valor_R2.data = float(angles[1])*90/100*(-1)
