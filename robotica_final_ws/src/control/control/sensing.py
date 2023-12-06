@@ -64,7 +64,8 @@ class NodeName(Node):
                 data = self.ser.readline().decode('utf-8').rstrip()
                 angles = data.split(",")
                 if len(angles) == 2:
-                    self.valor_R1.data = float(angles[0])
+                    # Conversion al angulo real 
+                    self.valor_R1.data = 11.982*float(angles[0]) - 595.12
                     self.pub_R1.publish(self.valor_R1)
 
                     self.valor_R2.data = float(angles[1])
@@ -115,7 +116,6 @@ class NodeName(Node):
         self.pub_P2.publish(self.valor_P2)
         print(self.valor_P2.data)
         
-
 def main(args=None) -> None:
     rclpy.init(args=args)
     node_name= NodeName()
